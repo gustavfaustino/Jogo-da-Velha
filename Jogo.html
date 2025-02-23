@@ -11,9 +11,17 @@
 
 <body>
     <h1>Jogo da Velha</h1>
-    <div class="board" id="board"></div>
-    <div class="message" id="message"></div>
-    <button onclick="recomeca()">Reiniciar</button>
+    <div id="board"></div> 
+    <div id="message"></div>
+    <!--Botão de reiniciar no canto superior direito-->
+    <button id="reiniciar" onclick="recomeca()">Reiniciar</button>
+
+    <!--Botões na parte inferior-->
+    <div id="game-options">
+
+        <button id="playLocal" onclick="startGame('local')">Jogar com outra pessoa</button>
+        <button id="playComputer" onclick="startGame('computer')">Jogar contra o computador</button>
+    </div>
 
     <script src="./Jogo.js"></script>
     
