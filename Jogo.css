@@ -1,0 +1,52 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 12vh);
+    grid-template-rows: repeat(3, 12vh);
+    grid-gap: 1vh;
+    width: 40vh;
+    height: 40vh;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3vh;
+    background-color: #ddd;
+}
+
+.cell {
+    width: 12vh;
+    height: 12vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 5vh; 
+    background-color: #fff;
+    border: 0.5vh solid #333;
+    cursor: pointer;
+}
+
+.cell.disabled {
+    cursor: not-allowed;
+
+}
+
+.message {
+    margin-top: 3vh;
+    font-size: 2.5vh;
+
+}
+
+button {
+    margin-top: 1.5vh;
+    padding: 1.5vh;
+    font-size: 3vh;
+    cursor: pointer;
+    color: green;
+
+}
