@@ -5,8 +5,18 @@ body {
     height: 100vh;
     font-family: Arial, Helvetica, sans-serif;
     margin: 0;
+    background-color: #fff;
+    color: #333;
 
 }
+
+/*modo escuro*/
+body.dark {
+    background-color: #333;
+    color: #fff;
+}
+
+
 
 h1 {
     text-align: center;
@@ -26,6 +36,10 @@ h1 {
     background-color: #ddd;
 }
 
+#board.dark {
+    background-color: #555;
+}
+
 .cell {
     width: 12vh;
     height: 12vh;
@@ -36,6 +50,17 @@ h1 {
     background-color: #fff;
     border: 0.5vh solid #333;
     cursor: pointer;
+    color: #333;
+}
+
+body.dark .cell {
+    color: #131212;
+}
+
+.cell.dark {
+    background-color: #555;
+    color: #000000;
+    border: 1px solid #fff;
 }
 
 .cell.disabled {
@@ -57,17 +82,44 @@ button {
     padding: 1.5vh;
     font-size: 3vh;
     cursor: pointer;
-    color: green;
+    background-color: #f8f8f8;
+    color: #333;
+    border-radius: 5px;
 
+}
+
+button.dark {
+    background-color: #444;
+    color: #fff;
+    border: 1px solid #fff;
+}
+
+button.dark:hover {
+    background-color: #555;
+    color: #ddd;
 }
 
 #reiniciar {
     position: absolute;
     top: 2vh;
     right: 2vh;
-    background-color: #f8f8f8;
+    background-color: #f88323;
     border: 1px solid #333;
+    border-radius: 5px;
 }
+
+#reiniciar.dark {
+    background-color: #444;
+    color: #fff;
+    border: 1px solid #fff;
+}
+
+#reiniciar.dark.hover {
+    background-color: #555;
+    color: #ddd;
+}
+
+
 
 #game-options {
     display: flex;

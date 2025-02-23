@@ -11,17 +11,19 @@
 
 <body>
     <h1>Jogo da Velha</h1>
-    <div id="board"></div> 
+    <div id="board" class="board"></div> 
     <div id="message"></div>
     <!--Botão de reiniciar no canto superior direito-->
     <button id="reiniciar" onclick="recomeca()">Reiniciar</button>
 
     <!--Botões na parte inferior-->
     <div id="game-options">
-
-        <button id="playLocal" onclick="startGame('local')">Jogar com outra pessoa</button>
-        <button id="playComputer" onclick="startGame('computer')">Jogar contra o computador</button>
+        <button id="playLocal">Jogar com outra pessoa</button>
+        <button id="playComputer" >Jogar contra o computador</button>
     </div>
+
+    <button id="toggleDarkMode" onclick="toggleDarkMode()">Alternar Modo Escuro</button>
+
 
     <script src="./Jogo.js"></script>
     

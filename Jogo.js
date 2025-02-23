@@ -1,8 +1,22 @@
 const board = document.getElementById("board");
-const message = document.getElementById("message"); // Corrigido para id="message"
+const message = document.getElementById("message");
 let cells = [];
 let currentPlayer = "X"; // Jogador inicial
 let boardState = ["", "", "", "", "", "", "", "", ""]; // Tabuleiro vazio
+
+// Função para alternar o modo escuro
+function toggleDarkMode() {
+    document.body.classList.toggle('dark');
+    const board = document.getElementById('board');
+    board.classList.toggle('dark');
+    const buttons = document.querySelectorAll('button');
+    buttons.forEach(button => button.classList.toggle('dark')); // Adicionando a classe dark para os botões
+
+    //Adcionando a classe 'dark' no botão de reiniciar
+    const reiniciarButton = document.getElementById('reiniciar');
+    reiniciarButton.classList.toggle('dark');
+}
+
 
 // Função para verificar o vencedor
 function checkWinner() {
@@ -31,7 +45,7 @@ function checkWinner() {
     }
 }
 
-// Desabilita o tabuleiro
+// Desabilita o tabuleiro após o fim do jogo
 function disableBoard() {
     cells.forEach(cell => cell.classList.add("disabled"));
 }
@@ -70,21 +84,25 @@ function createBoard() {
     }
 }
 
-document.getElementById('playLocal').addEventListener('click', () => {
-    recomeca(); // Reinicia o jogo para o modo local
-    console.log("Modo local iniciado");
-});
-
-document.getElementById('playComputer').addEventListener('click', () => {
-    // Em breve, adicionar lógica para o modo contra o computador
-    recomeca(); // Reinicia o jogo para o modo contra o computador
-    console.log("Modo contra o computador iniciado!");
-});
-
-// Inicializa o tabuleiro quando a página carrega
-window.onload = function() {
-    createBoard();
+// Função para iniciar o jogo, recebendo o modo como parâmetro
+function startGame(mode) {
+    console.log(`Modo de jogo selecionado: ${mode}`);
+    if (mode === 'local') {
+        // Lógica para iniciar o jogo local
+        recomeca();  // Reinicia o jogo para o modo local
+    } else if (mode === 'computer') {
+        // Lógica para iniciar o jogo contra o computador
+        recomeca();  // Reinicia o jogo para o modo contra o computador
+        console.log("Modo contra o computador iniciado!");
+    }
 }
 
-console.log("Tabuleiro criado com sucesso!", cells);
+// Adicionando os ouvintes de evento
+document.getElementById('playLocal').addEventListener('click', () => startGame('local'));
+document.getElementById('playComputer').addEventListener('click', () => startGame('computer'));
+
+
+window.onload = function() {
+    createBoard(); 
+};
 
