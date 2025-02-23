@@ -6,16 +6,23 @@ let boardState = ["", "", "", "", "", "", "", "", ""]; // Tabuleiro vazio
 
 // Função para alternar o modo escuro
 function toggleDarkMode() {
-    document.body.classList.toggle('dark');
-    const board = document.getElementById('board');
-    board.classList.toggle('dark');
+    const body = document.body;
+    const button = document.getElementById('toggleDarkMode');
+    
+    // Alterna o modo escuro
+    body.classList.toggle('dark');
+    document.getElementById('board').classList.toggle('dark');
     const buttons = document.querySelectorAll('button');
-    buttons.forEach(button => button.classList.toggle('dark')); // Adicionando a classe dark para os botões
+    buttons.forEach(button => button.classList.toggle('dark'));
 
-    //Adcionando a classe 'dark' no botão de reiniciar
-    const reiniciarButton = document.getElementById('reiniciar');
-    reiniciarButton.classList.toggle('dark');
+    // Atualiza o texto do botão
+    if (body.classList.contains('dark')) {
+        button.innerText = "Modo claro"; // Quando estiver no modo escuro, o texto muda para "Modo claro"
+    } else {
+        button.innerText = "Modo escuro"; // Quando estiver no modo claro, o texto muda para "Modo escuro"
+    }
 }
+
 
 
 // Função para verificar o vencedor
