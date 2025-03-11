@@ -6,7 +6,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jogo da Velha</title>
     <link rel="stylesheet" href="./Jogo.css">
-    <link rel="icon" href="./img/icone.png">
+    <link re<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jogo da Velha</title>
+    <link rel="stylesheet" href="./Jogo.css" />
+    <link rel="icon" href="./img/icone.png" />
+  </head>
+
+  <body>
+    
+    <h1>Jogo da Velha</h1>
+    <div id="board" class="board"></div>
+    <div id="message"></div>
+    <!--Botão de reiniciar no canto superior direito-->
+    <button id="reiniciar" onclick="recomeca()">Reiniciar</button>
+
+    <!-- From Uiverse.io by Madflows -->
+    <div class="toggle-switch">
+      <label class="switch-label">
+        <input type="checkbox" class="checkbox" onclick="toggleLightMode()"/>
+        <span class="slider"></span>
+      </label>
+    </div>
+
+    <!--Botões na parte inferior-->
+    <div id="game-options">
+      <button id="playLocal">Jogar com outra pessoa</button>
+      <button id="playComputer">Jogar contra o computador</button>
+    </div>
+
+    <!-- <button id="toggleDarkMode" onclick="toggleDarkMode()">Modo Escuro</button> -->
+
+    <script src="./Jogo.js"></script>
+  </body>
+</html>
+l="icon" href="./img/icone.png">
 </head>
 
 

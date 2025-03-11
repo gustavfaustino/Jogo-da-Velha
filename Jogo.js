@@ -3,27 +3,31 @@ const message = document.getElementById("message");
 let cells = [];
 let currentPlayer = "X"; // Jogador inicial
 let boardState = ["", "", "", "", "", "", "", "", ""]; // Tabuleiro vazio
+let gameMode = 'local'; // Modo de jogo padrão
 
-// Função para alternar o modo escuro
-function toggleDarkMode() {
+function toggleLightMode() {
     const body = document.body;
-    const button = document.getElementById('toggleDarkMode');
-    
-    // Alterna o modo escuro
-    body.classList.toggle('dark');
-    document.getElementById('board').classList.toggle('dark');
-    const buttons = document.querySelectorAll('button');
-    buttons.forEach(button => button.classList.toggle('dark'));
+    const checkbox = document.querySelector('.checkbox');
 
-    // Atualiza o texto do botão
-    if (body.classList.contains('dark')) {
-        button.innerText = "Modo claro"; // Quando estiver no modo escuro, o texto muda para "Modo claro"
-    } else {
-        button.innerText = "Modo escuro"; // Quando estiver no modo claro, o texto muda para "Modo escuro"
-    }
+    // Alterna o modo claro
+    body.classList.toggle('light', checkbox.checked);
+    document.getElementById('board').classList.toggle('light', checkbox.checked);
+    const buttons = document.querySelectorAll('button');
+    buttons.forEach(button => button.classList.toggle('light', checkbox.checked));
 }
 
+window.onload = function () {
+    createBoard();
+    // Define o tema padrão como escuro
+    document.body.classList.add('dark');
+    document.getElementById('board').classList.add('dark');
+    const buttons = document.querySelectorAll('button');
+    buttons.forEach(button => button.classList.add('dark'));
 
+    // Reseta o estado do checkbox
+    const checkbox = document.querySelector('.checkbox');
+    checkbox.checked = false;
+};
 
 // Função para verificar o vencedor
 function checkWinner() {
@@ -41,7 +45,7 @@ function checkWinner() {
             }
             disableBoard();
             alert(`Jogador ${currentPlayer} venceu! Clique em "Reiniciar" para jogar novamente`);
-            return;
+            return true;
         }
     }
 
@@ -49,7 +53,9 @@ function checkWinner() {
         if (message) {
             message.innerText = "Empate!";
         }
+        return true;
     }
+    return false;
 }
 
 // Desabilita o tabuleiro após o fim do jogo
@@ -62,9 +68,37 @@ function handleClick(index) {
     if (boardState[index] === "") {
         boardState[index] = currentPlayer;
         cells[index].innerText = currentPlayer;
-        checkWinner();
-        currentPlayer = currentPlayer === "X" ? "O" : "X"; // Alterna entre X e O
+        cells[index].style.color = currentPlayer === "X" ? "red" : "blue"; // Define a cor do texto
+        if (!checkWinner()) {
+            currentPlayer = currentPlayer === "X" ? "O" : "X"; // Alterna entre X e O
+            if (gameMode === 'computer' && currentPlayer === 'O') {
+                computerMove();
+            }
+        }
     }
+}
+
+// Função para a jogada do computador
+function computerMove() {
+    disableBoard(); // Desabilita o tabuleiro durante a jogada do computador
+    setTimeout(() => {
+        let availableCells = boardState.map((val, index) => val === "" ? index : null).filter(val => val !== null);
+        if (availableCells.length > 0) {
+            let randomIndex = availableCells[Math.floor(Math.random() * availableCells.length)];
+            boardState[randomIndex] = currentPlayer;
+            cells[randomIndex].innerText = currentPlayer;
+            cells[randomIndex].style.color = currentPlayer === "X" ? "red" : "blue"; // Define a cor do texto
+            if (!checkWinner()) {
+                currentPlayer = currentPlayer === "X" ? "O" : "X"; // Alterna entre X e O
+                enableBoard(); // Habilita o tabuleiro após a jogada do computador
+            }
+        }
+    }, 1000); // Delay de 1 segundo
+}
+
+// Função para habilitar o tabuleiro
+function enableBoard() {
+    cells.forEach(cell => cell.classList.remove("disabled"));
 }
 
 // Função para reiniciar o jogo
@@ -94,12 +128,9 @@ function createBoard() {
 // Função para iniciar o jogo, recebendo o modo como parâmetro
 function startGame(mode) {
     console.log(`Modo de jogo selecionado: ${mode}`);
-    if (mode === 'local') {
-        // Lógica para iniciar o jogo local
-        recomeca();  // Reinicia o jogo para o modo local
-    } else if (mode === 'computer') {
-        // Lógica para iniciar o jogo contra o computador
-        recomeca();  // Reinicia o jogo para o modo contra o computador
+    gameMode = mode;
+    recomeca();  // Reinicia o jogo para o modo selecionado
+    if (mode === 'computer') {
         console.log("Modo contra o computador iniciado!");
     }
 }
@@ -108,8 +139,6 @@ function startGame(mode) {
 document.getElementById('playLocal').addEventListener('click', () => startGame('local'));
 document.getElementById('playComputer').addEventListener('click', () => startGame('computer'));
 
-
-window.onload = function() {
-    createBoard(); 
+window.onload = function () {
+    createBoard();
 };
-
